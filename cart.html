@@ -2,14 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Cart</title>
+<title>Checkout</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-<nav class="nav">
-<h2>Reda Store</h2>
+    <nav class="nav">
+<h2>SuperShelf Store</h2>
 
 <div>
 <a href="index.html">Home</a>
@@ -19,17 +18,16 @@
 </div>
 </nav>
 
-<h1>Your Cart</h1>
+ <h1>Your Cart</h1>
 
-<div id="cartItems"></div>
+ <div id="cartItems"></div>
+ <h2 id="total"></h2>
+ <button onclick="clearCart()" class="btn">Clear cart</button>
+ <a href="checkout.html">
+    <button class="btn">Checkout</button>
+ </a>
 
-<h2 id="total"></h2>
 
-<a href="checkout.html">
-<button class="btn">Checkout</button>
-</a>
-
-<script src="script.js"></script>
-
+ <script src="script.js"></script>
 </body>
 </html>
