@@ -1,35 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Reda Store</title>
+<title>Book Store</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<nav class="nav">
-<h2>Reda Store</h2>
+<h1>Online Book Store</h1>
 
-<div>
-<a href="index.html">Home</a>
-<a href="products.html">Products</a>
-<a href="cart.html">Cart</a>
-<a href="about.html">About</a>
+<div class="books-container">
+
+<div class="book">
+<img src="https://8ghrb.com/wp-content/uploads/2020/09/22-5.jpg">
+<h3>Elon Musk</h3>
+<p>$50</p>
+<button onclick="addToCart('Clean Code',30)">Add to Cart</button>
 </div>
-</nav>
 
-<section class="hero">
+<div class="book">
+<img src="https://m.media-amazon.com/images/I/71g2ednj0JL.jpg">
+<h3>money</h3>
+<p>$25</p>
+<button onclick="addToCart('Atomic Habits',25)">Add to Cart</button>
+</div>
 
-<h1>Welcome to Reda Store</h1>
+<div class="book">
+<img src="https://cdn.aseeralkotb.com/storage/media/580504/conversions/%D8%B1%D8%AD%D9%84%D8%A9-%D8%A7%D9%84%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%B9%D8%AC%D9%8A%D8%A8-67571-250x375-webp.webp">
+<h3>The journey of the wondrous book</h3>
+<p>$100</p>
+<button onclick="addToCart('Pragmatic Programmer',35)">Add to Cart</button>
+</div>
 
-<p>Best products with good prices</p>
+</div>
 
-<a href="products.html">
-<button class="btn">Browse Products</button>
-</a>
+<hr>
 
-</section>
+<h2>Shopping Cart</h2>
+
+<ul id="cartList"></ul>
+
+<h3>Total: $<span id="total">0</span></h3>
+
+<script src="script.js"></script>
 
 </body>
 </html>
