@@ -8,7 +8,7 @@
 
 <body>
     <nav class="nav">
-<h2>Reda Store</h2>
+<h2>SuperShelf Store</h2>
 
 <div>
 <a href="index.html">Home</a>
@@ -20,17 +20,17 @@
 
 <h1>Checkout</h1>
 
-<form class="form">
+<form class="form" onsubmit="confirmOrder(event)">
 
-<input type="text" placeholder="Full Name" required>
+<input type="text" id="name" placeholder="Full Name" required>
 
-<input type="text" placeholder="Address" required>
+<input type="text" id="address" placeholder="Address" required>
 
-<input type="text" placeholder="Phone">
+<input type="text" id="phone" placeholder="Phone">
 
-<button class="btn">Confirm Order</button>
+<button type="submit" class="btn">Confirm order</button>
 
 </form>
-
+<script src="script.js"></script>
 </body>
 </html>
