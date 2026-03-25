@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Checkout</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <nav class="nav">
+<h2>SuperShelf Store</h2>
+
+<div>
+<a href="index.html">Home</a>
+<a href="products.html">Products</a>
+<a href="cart.html">Cart</a>
+<a href="about.html">About</a>
+</div>
+</nav>
+
+<h1>Checkout</h1>
+
+<form class="form" onsubmit="confirmOrder(event)">
+
+<input type="text" id="name" placeholder="Full Name" required>
+
+<input type="text" id="address" placeholder="Address" required>
+
+<input type="text" id="phone" placeholder="Phone">
+
+<button type="submit" class="btn">Confirm order</button>
+
+</form>
+<script src="..\Js\script.js"></script>
+</body>
+</html>
