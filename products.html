@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الكتب</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <h2 class="logo">📚 BookSwap</h2>
+      <nav class="menu">
+        <a href="./index.html">الرئيسية</a>
+        <a href="./products.html">الكتب</a>
+        <a href="./cart.html">السلة</a>
+        <a href="./about.html">عنّا</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="section">
+      <h1 class="section-title">كل الكتب</h1>
+      <p class="section-sub">تقدر تشتري الكتاب مباشرة أو تدخل على التفاصيل وتعمل طلب استبدال.</p>
+
+      <div class="toolbar">
+        <div id="categories" class="categories"></div>
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="ابحث باسم الكتاب أو المؤلف..." />
+        </div>
+      </div>
+
+      <div id="products" class="products"></div>
+    </section>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
