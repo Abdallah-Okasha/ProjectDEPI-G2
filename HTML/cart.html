@@ -10,10 +10,11 @@
 <nav class="nav">
   <h2>SuperShelf Store</h2>
   <div>
-    <a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="cart.html">Cart</a>
-    <a href="about.html">About</a>
+<a href="index.html">Home</a>
+<a href="products.html"> Products</a>
+<a href="cart.html">Cart</a>
+<a href="login.html">Sign in</a>
+<a href="about.html">About</a>
   </div>
 </nav>
 
@@ -27,11 +28,15 @@
     <div id="total">Total: $0</div>
     <div class="cart-buttons">
       <button class="clear-btn" onclick="clearCart()">Clear Cart</button>
-      <a href="checkout.html"><button class="checkout-btn">Checkout</button></a>
+      <button id="checkoutBtn" class="checkout-btn">Checkout</button>
     </div>
   </div>
 </section>
 
+<div id="purchasePopup" class="popup">
+  <p>Thanks for your purchase!</p>
+  <button id="closePopup">Close</button>
+</div>
 <script src="../Js/script.js"></script>
 </body>
 </html>

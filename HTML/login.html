@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auth</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+  <h2>SuperShelf Store</h2>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="about.html">About</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card">
+
+    <h2 id="formTitle">Login</h2>
+
+    <div class="input-group">
+      <input type="email" id="email" placeholder="Email">
+      <div class="error" id="emailError"></div>
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Password">
+      <div class="error" id="passwordError"></div>
+    </div>
+
+    <div class="input-group" id="confirmGroup" style="display:none;">
+      <input type="password" id="confirmPassword" placeholder="Confirm Password">
+      <div class="error" id="confirmError"></div>
+    </div>
+
+    <div id="statusMessage" class="status"></div>
+    <button id="login-btn" onclick="handleSubmit()">Submit</button>
+
+    <div class="switch">
+      <span id="toggleText">Don't have an account? Sign up</span>
+    </div>
+
+  </div>
+</div>
+
+<script src="../Js/validation.js" defer></script>
+
+</body>
+</html>
