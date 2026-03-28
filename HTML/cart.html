@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Product Details</title>
+<title>Checkout</title>
 <link rel="stylesheet" href="../css/style.css">
 </head>
 
@@ -18,9 +18,16 @@
 </div>
 </nav>
 
-<div id="productDetails" class="productDetails"></div>
+ <h1>Your Cart</h1>
 
-<script src="../Js/script.js"></script>
+ <div id="cartItems"></div>
+ <h2 id="total"></h2>
+ <button onclick="clearCart()" class="btn">Clear cart</button>
+ <a href="checkout.html">
+    <button class="btn">Checkout</button>
+ </a>
 
+
+ <script src="..\Js\script.js"></script>
 </body>
 </html>
