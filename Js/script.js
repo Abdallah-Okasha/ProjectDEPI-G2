@@ -131,3 +131,15 @@ function confirmOrder(e) {
 document.addEventListener("DOMContentLoaded", () => {
     displayCart();
 });
+
+const checkoutBtn = document.getElementById("checkoutBtn"); // your checkout button
+const popup = document.getElementById("purchasePopup");
+const closeBtn = document.getElementById("closePopup");
+
+checkoutBtn.onclick = () => {
+  popup.style.display = "flex"; // show popup and center
+};
+
+closeBtn.onclick = () => {
+  popup.style.display = "none"; // hide popup
+};
