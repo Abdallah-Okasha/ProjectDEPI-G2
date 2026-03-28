@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إتمام الطلب</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <h2 class="logo">📚 BookSwap</h2>
+      <nav class="menu">
+        <a href="./index.html">الرئيسية</a>
+        <a href="./products.html">الكتب</a>
+        <a href="./cart.html">السلة</a>
+        <a href="./about.html">عنّا</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="section">
+      <h1 class="section-title">إتمام الطلب</h1>
+
+      <form class="checkout-form" onsubmit="submitCheckout(event)">
+        <input type="text" placeholder="الاسم بالكامل" required />
+        <input type="text" placeholder="رقم الهاتف" required />
+        <input type="text" placeholder="العنوان" required />
+        <textarea placeholder="ملاحظات إضافية"></textarea>
+        <button type="submit" class="btn">تأكيد الطلب</button>
+      </form>
+    </section>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
