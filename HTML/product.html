@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar">
 <head>
-<meta charset="UTF-8">
-<title>Product Details</title>
-<link rel="stylesheet" href="../Assets/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تفاصيل الكتاب</title>
+  <link rel="stylesheet" href="./style.css" />
 </head>
-
 <body>
-    <nav class="nav">
-<h2>SuperShelf Store</h2>
+  <header class="site-header">
+    <div class="container nav">
+      <h2 class="logo">📚 BookSwap</h2>
+      <nav class="menu">
+        <a href="./index.html">الرئيسية</a>
+        <a href="./products.html">الكتب</a>
+        <a href="./cart.html">السلة</a>
+        <a href="./about.html">عنّا</a>
+      </nav>
+    </div>
+  </header>
 
-<div>
-<a href="index.html">Home</a>
-<a href="products.html">Products</a>
-<a href="cart.html">Cart</a>
-<a href="about.html">About</a>
-</div>
-</nav>
+  <div class="container">
+    <section id="productDetails" class="section"></section>
+  </div>
 
-<div id="productDetails" class="productDetails"></div>
-
-<script src="script.js"></script>
-
+  <script src="./script.js"></script>
 </body>
 </html>

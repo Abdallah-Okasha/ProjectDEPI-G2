@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>إتمام الطلب</title>
+  <title>السلة</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
@@ -21,15 +21,23 @@
 
   <div class="container">
     <section class="section">
-      <h1 class="section-title">إتمام الطلب</h1>
+      <h1 class="section-title">السلة</h1>
 
-      <form class="checkout-form" onsubmit="submitCheckout(event)">
-        <input type="text" placeholder="الاسم بالكامل" required />
-        <input type="text" placeholder="رقم الهاتف" required />
-        <input type="text" placeholder="العنوان" required />
-        <textarea placeholder="ملاحظات إضافية"></textarea>
-        <button type="submit" class="btn">تأكيد الطلب</button>
-      </form>
+      <div class="cart-grid">
+        <div class="cart-box">
+          <h2>كتب الشراء</h2>
+          <div id="cartItems"></div>
+        </div>
+
+        <div class="cart-box">
+          <h2>طلبات الاستبدال</h2>
+          <div id="swapItems"></div>
+        </div>
+      </div>
+
+      <div class="cart-actions">
+        <a href="./checkout.html" class="btn">إتمام الطلب</a>
+      </div>
     </section>
   </div>
 
