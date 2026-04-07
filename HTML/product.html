@@ -21,7 +21,36 @@
 
 <div id="productDetails" class="productDetails"></div>
 
-<script src="../Js/script.js"></script>
+<script >
+   
+let params = new URLSearchParams(window.location.search);
+let id = params.get("id");
+
+
+let xhr = new XMLHttpRequest();
+
+xhr.open("GET", `https://dummyjson.com/products/${id}`);
+
+xhr.onload = function () {
+  if (xhr.status === 200) {
+
+    let product = JSON.parse(xhr.responseText);
+
+    let container = document.getElementById("productDetails");
+
+    container.innerHTML = `
+      <div class="product-details">
+        <img src="${product.thumbnail}" />
+        <h2>${product.title}</h2>
+        <p>${product.description}</p>
+        <h3>$${product.price}</h3>
+      </div>
+    `;
+  }
+};
+
+xhr.send();
+</script>
 
 </body>
 </html>

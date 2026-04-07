@@ -19,8 +19,12 @@ if (container) {
             <img src="${product.thumbnail}" alt="${product.title}" />
             <h3>${product.title}</h3>
             <p>$${product.price}</p>
-           <button class="addtocart-btn" onclick="addToCart('${product.title}', ${product.price} , this)">Add to cart</button>
-           
+            <div class="buttons">
+                 <button class="addtocart-btn" onclick="addToCart('${product.title}', ${product.price} , this)">Add to cart</button>
+             <a href="product.html?id=${product.id}">
+        <button class="btn">View Details</button>
+      </a>
+            </div>
            </div>
         `;
       });
