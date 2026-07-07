@@ -11,7 +11,8 @@ import Checkout from './pages/Checkout'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import About from './pages/About'
-
+import Books from './pages/Books'
+import BookDetail from './pages/BookDetail'
 export default function App() {
   return (
     <AuthProvider>
@@ -21,6 +22,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/Books" element={<Books />} />
+          <Route path="/book" element={<BookDetail />} />
           <Route path="/product" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
