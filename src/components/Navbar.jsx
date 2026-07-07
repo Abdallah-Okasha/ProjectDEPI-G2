@@ -28,7 +28,7 @@ export default function Navbar() {
       <div className="d-flex gap-4 flex-wrap align-items-center">
         <Link to="/" className="text-white text-decoration-none fw-medium">Home</Link>
         <Link to="/products" className="text-white text-decoration-none fw-medium">Products</Link>
-        <Link to="/cart" className="text-white text-decoration-none fw-medium">Cart</Link>
+                <Link to="/cart" className="text-white text-decoration-none fw-medium">Cart</Link>
         <Link to="/about" className="text-white text-decoration-none fw-medium">About</Link>
         <div className="profile-dropdown" ref={ref}>
           <button className="profile-btn" onClick={() => setOpen(!open)}>
