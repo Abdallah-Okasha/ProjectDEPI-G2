@@ -1,6 +1,11 @@
+import Breadcrumbs from '../components/Breadcrumbs'
+
 export default function About() {
   return (
     <div className="mx-auto text-center p-5" style={{ maxWidth: 700 }}>
+      <div className="text-start">
+        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
+      </div>
       <h1>About SuperShelf Store</h1>
       <p>
         SuperShelf Store is a simple e-commerce website that allows users to browse different

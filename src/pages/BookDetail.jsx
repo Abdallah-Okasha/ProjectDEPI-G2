@@ -2,6 +2,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom'
 import books from '../data/booksData'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
+import Breadcrumbs from '../components/Breadcrumbs'
 
 export default function BookDetail() {
   const [searchParams] = useSearchParams()
@@ -14,20 +15,35 @@ export default function BookDetail() {
 
   if (!book) {
     return (
-      <div className="text-center p-5">
-        <h2>Book not found</h2>
-        <button
-          className="btn btn-success mt-3"
-          onClick={() => navigate('/products?category=books')}
-        >
-          Back to Books
-        </button>
-      </div>
+      <>
+        <div className="px-4" style={{ maxWidth: 850, margin: '0 auto' }}>
+          <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Books', href: '/Books' }, { label: 'Book' }]} />
+        </div>
+        <div className="text-center p-5">
+          <h2>Book not found</h2>
+          <button
+            className="btn btn-success mt-3"
+            onClick={() => navigate('/products?category=books')}
+          >
+            Back to Books
+          </button>
+        </div>
+      </>
     )
   }
 
+  const breadcrumbItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Books', href: '/Books' },
+    { label: book.title },
+  ]
+
   return (
-    <div className="productDetails p-5">
+    <>
+      <div className="px-4" style={{ maxWidth: 850, margin: '0 auto' }}>
+        <Breadcrumbs items={breadcrumbItems} />
+      </div>
+      <div className="productDetails p-5">
       <div
         className="product-details bg-white rounded shadow p-4 mx-auto"
         style={{ maxWidth: 850 }}
@@ -85,5 +101,6 @@ export default function BookDetail() {
         </div>
       </div>
     </div>
+    </>
   )
 }

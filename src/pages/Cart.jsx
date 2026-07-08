@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import Breadcrumbs from '../components/Breadcrumbs'
 
 export default function Cart() {
   const { cart, removeItem, clearCart, getTotal } = useCart()
@@ -10,6 +11,9 @@ export default function Cart() {
 
   return (
     <section className="cart-wrapper bg-white rounded shadow p-4 mx-auto">
+      <div className="px-2">
+        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Cart' }]} />
+      </div>
       <h1 className="text-center mb-4">Your Shopping Cart</h1>
 
       <div id="cartItems" className="d-flex flex-column gap-3">

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Navigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from '../context/AuthContext'
+import Breadcrumbs from '../components/Breadcrumbs'
 
 function WishlistSection() {
   const [wishlist, setWishlist] = useState(() => {
@@ -269,6 +270,7 @@ export default function Dashboard() {
 
   return (
     <div className="mx-auto" style={{ maxWidth: 800, padding: '40px 20px' }}>
+      <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Dashboard' }]} />
       <h1 className="text-center mt-0 mb-4">Dashboard</h1>
 
       <h2>{role === 'admin' ? 'Admin Panel' : 'My Profile'}</h2>
