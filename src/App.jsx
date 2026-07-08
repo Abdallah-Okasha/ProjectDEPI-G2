@@ -5,14 +5,14 @@ import Navbar from './components/Navbar'
 import CartMessage from './components/CartMessage'
 import Home from './pages/Home'
 import Products from './pages/Products'
-import ProductDetail from './pages/ProductDetail'
+import ProductDetails from './pages/ProductDetails'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import About from './pages/About'
 import Books from './pages/Books'
-import BookDetail from './pages/BookDetail'
+
 export default function App() {
   return (
     <AuthProvider>
@@ -23,8 +23,8 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/Books" element={<Books />} />
-          <Route path="/book" element={<BookDetail />} />
-          <Route path="/product" element={<ProductDetail />} />
+          <Route path="/book" element={<ProductDetails />} />
+          <Route path="/product" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
