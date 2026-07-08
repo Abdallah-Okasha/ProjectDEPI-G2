@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import Breadcrumbs from '../components/Breadcrumbs'
 
 const ADMIN_EMAIL = 'abdallah.okasha42@gmail.com'
 
@@ -97,7 +98,10 @@ export default function Login() {
   }
 
   return (
-    <div className="container d-flex justify-content-center align-items-center">
+    <div className="container d-flex flex-column justify-content-center align-items-center">
+      <div style={{ width: 350 }} className="mb-2">
+        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Login' }]} />
+      </div>
       <div className="card bg-white rounded shadow p-4" style={{ width: 350 }}>
         <h2 className="text-center mb-4">{isSignup ? 'Sign Up' : 'Login'}</h2>
 

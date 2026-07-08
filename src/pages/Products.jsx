@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useAuth } from '../context/AuthContext'
 import { useCart } from '../context/CartContext'
 import booksList from '../data/booksData'
+import Breadcrumbs from '../components/Breadcrumbs'
 
 const categoryFilters = [
   { name: 'All Products', image: '/imgs/fe20e5572cf901ea950e5728870c422f.jpg', slug: 'all' },
@@ -230,8 +231,18 @@ export default function Products() {
     navigate(`/products?category=${slug}`)
   }
 
+  const breadcrumbItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Products' },
+    ...(activeCategory === 'books' ? [{ label: 'Books' }] : []),
+  ]
+
   return (
-    <div className="products-layout">
+    <>
+      <div className="px-4" style={{ maxWidth: '70%', margin: '0 auto' }}>
+        <Breadcrumbs items={breadcrumbItems} />
+      </div>
+      <div className="products-layout">
       <aside className="products-sidebar">
         <div className="sidebar-header">
           <h5>Filters</h5>
@@ -379,5 +390,6 @@ export default function Products() {
         )}
       </main>
     </div>
+    </>
   )
 }
