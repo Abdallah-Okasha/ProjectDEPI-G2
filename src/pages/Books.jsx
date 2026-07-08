@@ -1,11 +1,15 @@
 import Books from '../data/booksData'
 import { useCart } from '../context/CartContext'
+import Breadcrumbs from '../components/Breadcrumbs'
 
 export default function Book() {
   const { addToCart } = useCart()
 
   return (
     <section className="books-page">
+      <div className="px-4" style={{ maxWidth: '70%', margin: '0 auto' }}>
+        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Books' }]} />
+      </div>
       <div className="books-header text-center">
         <h1>Books</h1>
         <p>Selected books from Aseer Alkotb</p>

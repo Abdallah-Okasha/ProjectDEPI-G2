@@ -586,3 +586,20 @@ body {
   font-weight: bold;
   color: #2a9d6f;
 }
+
+.breadcrumb {
+  background: transparent;
+}
+
+.breadcrumb-item a {
+  color: #2a9d6f;
+  text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+  color: #6c757d;
+}
