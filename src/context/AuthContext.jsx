@@ -15,22 +15,30 @@ export default function AuthProvider({ children }) {
     return localStorage.getItem('role') || 'user'
   })
 
-  function login(role = 'user') {
+  const [email, setEmail] = useState(() => {
+    return localStorage.getItem('userEmail') || ''
+  })
+
+  function login(email, role = 'user') {
     setIsLoggedIn(true)
     setRole(role)
+    setEmail(email)
     localStorage.setItem('isLoggedIn', 'true')
     localStorage.setItem('role', role)
+    localStorage.setItem('userEmail', email)
   }
 
   function logout() {
     setIsLoggedIn(false)
     setRole('user')
+    setEmail('')
     localStorage.removeItem('isLoggedIn')
     localStorage.removeItem('role')
+    localStorage.removeItem('userEmail')
   }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, role, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, role, email, login, logout }}>
       {children}
     </AuthContext.Provider>
   )
