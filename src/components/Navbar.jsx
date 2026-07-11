@@ -6,7 +6,7 @@ import { useCart } from '../context/CartContext'
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
-  const { isLoggedIn, logout } = useAuth()
+  const { isLoggedIn, role, logout } = useAuth()
   const { clearCart } = useCart()
   const navigate = useNavigate()
 
@@ -37,9 +37,27 @@ export default function Navbar() {
           {open && (
             <div className="dropdown-menu">
               {isLoggedIn ? (
-                <><button className="dropdown-item" onClick={() => { setOpen(false); navigate('/dashboard') }}>Dashboard</button><button className="dropdown-item" onClick={() => { logout(); clearCart(); setOpen(false); navigate('/') }}>Logout</button></>
+                <>
+                  {role === 'admin' && (
+                    <button className="dropdown-item" onClick={() => { setOpen(false); navigate('/dashboard') }}>
+                      <i className="bi bi-speedometer2 me-2"></i>Dashboard
+                    </button>
+                  )}
+                  <button className="dropdown-item" onClick={() => { setOpen(false); navigate('/orders') }}>
+                    <i className="bi bi-box-seam me-2"></i>Orders
+                  </button>
+                  <button className="dropdown-item" onClick={() => { setOpen(false); navigate('/wishlist') }}>
+                    <i className="bi bi-heart me-2"></i>Wishlist
+                  </button>
+                  <div className="dropdown-divider"></div>
+                  <button className="dropdown-item" onClick={() => { logout(); clearCart(); setOpen(false); navigate('/') }}>
+                    <i className="bi bi-box-arrow-right me-2"></i>Logout
+                  </button>
+                </>
               ) : (
-                <button className="dropdown-item" onClick={() => { setOpen(false); navigate('/login') }}>Login</button>
+                <button className="dropdown-item" onClick={() => { setOpen(false); navigate('/login') }}>
+                  <i className="bi bi-person me-2"></i>Login
+                </button>
               )}
             </div>
           )}

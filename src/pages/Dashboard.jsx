@@ -236,10 +236,12 @@ function OrdersSection() {
             ))}
             <hr className="my-2" />
             <p className="text-end mb-2 fw-bold">Total: ${order.total.toFixed(2)}</p>
-            <div className="d-flex gap-2">
-              <button className="btn btn-sm btn-outline-warning" onClick={e => { e.stopPropagation(); updateStatus(i, 'Processing') }}>Mark Processing</button>
-              <button className="btn btn-sm btn-outline-success" onClick={e => { e.stopPropagation(); updateStatus(i, 'Shipped') }}>Mark Shipped</button>
-            </div>
+            {order.status !== 'Cancelled' && order.status !== 'Shipped' && (
+              <div className="d-flex gap-2">
+                <button className="btn btn-sm btn-outline-warning" onClick={e => { e.stopPropagation(); updateStatus(i, 'Processing') }}>Mark Processing</button>
+                <button className="btn btn-sm btn-outline-success" onClick={e => { e.stopPropagation(); updateStatus(i, 'Shipped') }}>Mark Shipped</button>
+              </div>
+            )}
           </div>
         ))
       )}
@@ -255,25 +257,22 @@ export default function Dashboard() {
     return <Navigate to="/login" replace />
   }
 
-  const adminSections = [
+  if (role !== 'admin') {
+    return <Navigate to="/" replace />
+  }
+
+  const sections = [
     { key: 'products', title: 'Manage Products', desc: 'Add, edit, or remove products from the catalog.', component: <ManageProductsSection /> },
     { key: 'users', title: 'Manage Users', desc: 'View and manage registered users.', component: <ManageUsersSection /> },
     { key: 'orders', title: 'Orders', desc: 'View all customer orders and update their status.', component: <OrdersSection /> },
   ]
-
-  const userSections = [
-    { key: 'history', title: 'Order History', desc: 'View your past orders and track current shipments.', component: <OrderHistorySection /> },
-    { key: 'wishlist', title: 'Wishlist', desc: 'Manage your saved items and favorites.', component: <WishlistSection /> },
-  ]
-
-  const sections = role === 'admin' ? adminSections : userSections
 
   return (
     <div className="mx-auto" style={{ maxWidth: 800, padding: '40px 20px' }}>
       <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Dashboard' }]} />
       <h1 className="text-center mt-0 mb-4">Dashboard</h1>
 
-      <h2>{role === 'admin' ? 'Admin Panel' : 'My Profile'}</h2>
+      <h2>Admin Panel</h2>
       <div className="d-grid gap-4 mt-4">
         {sections.map(s => (
           <div key={s.key} className="product bg-white rounded text-start p-4" style={{ cursor: 'pointer' }} onClick={() => setActiveSection(activeSection === s.key ? null : s.key)}>

@@ -77,7 +77,7 @@ export default function Login() {
       users.push({ email, password, role: matchEmail(email, ADMIN_EMAIL) ? 'admin' : 'user' })
       saveUsers(users)
       const role = matchEmail(email, ADMIN_EMAIL) ? 'admin' : 'user'
-      login(role)
+      login(email, role)
       setStatus({ message: 'Signup successful', type: 'success' })
       setTimeout(() => navigate('/'), 500)
     } else {
@@ -91,7 +91,7 @@ export default function Login() {
         return
       }
       const role = matchEmail(email, ADMIN_EMAIL) ? 'admin' : 'user'
-      login(role)
+      login(email, role)
       setStatus({ message: 'Login successful', type: 'success' })
       setTimeout(() => navigate('/'), 500)
     }

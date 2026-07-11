@@ -12,6 +12,8 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import About from './pages/About'
 import Books from './pages/Books'
+import OrderHistory from './pages/OrderHistory'
+import Wishlist from './pages/Wishlist'
 
 export default function App() {
   return (
@@ -30,6 +32,8 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/about" element={<About />} />
+          <Route path="/orders" element={<OrderHistory />} />
+          <Route path="/wishlist" element={<Wishlist />} />
         </Routes>
       </CartProvider>
     </AuthProvider>
