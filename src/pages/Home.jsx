@@ -1,8 +1,12 @@
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import { useCart } from '../context/CartContext'
 import HotDeals from '../data/HotDeals'
 
 export default function Home() {
   const navigate = useNavigate()
+  const { isLoggedIn } = useAuth()
+  const { addToCart, showMessage } = useCart()
 
   return (
     <>
@@ -55,7 +59,7 @@ export default function Home() {
                 </div>
 
                 <div style={{ textAlign: 'center', padding: '12px 0 0', fontSize: '12px', color: '#f77f00', fontFamily: 'monospace' }}>
-                  Ends in: 04:12:33
+                  
                 </div>
 
                 <div style={{ padding: '15px', display: 'flex', justifyContent: 'center', background: '#fafafa' }}>
@@ -77,7 +81,7 @@ export default function Home() {
                   <button
                     className="btn btn-success w-100"
                     style={{ borderRadius: '6px', fontWeight: 600, fontSize: '13px' }}
-                    onClick={e => { e.stopPropagation(); navigate(`/product?id=${deal.id}`) }}
+                    onClick={e => { e.stopPropagation(); if (!isLoggedIn) { showMessage('Please sign in first'); return } addToCart(deal.title, deal.price) }}
                   >
                     Add to Cart
                   </button>

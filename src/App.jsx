@@ -10,6 +10,7 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
+import ManageItems from './pages/ManageItems'
 import About from './pages/About'
 import Books from './pages/Books'
 import OrderHistory from './pages/OrderHistory'
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/manage-items" element={<ManageItems />} />
           <Route path="/about" element={<About />} />
           <Route path="/orders" element={<OrderHistory />} />
           <Route path="/wishlist" element={<Wishlist />} />

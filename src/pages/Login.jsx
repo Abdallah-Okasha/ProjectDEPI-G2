@@ -17,9 +17,17 @@ function saveUsers(users) {
   localStorage.setItem('users', JSON.stringify(users))
 }
 
-function validatePassword(password) {
-  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/
-  return regex.test(password)
+function checkPasswordReqs(password) {
+  return {
+    length: password.length >= 8,
+    upper: /[A-Z]/.test(password),
+    lower: /[a-z]/.test(password),
+    digit: /\d/.test(password),
+  }
+}
+
+function allReqsMet(reqs) {
+  return reqs.length && reqs.upper && reqs.lower && reqs.digit
 }
 
 export default function Login() {
@@ -52,10 +60,7 @@ export default function Login() {
       valid = false
     }
 
-    if (!validatePassword(password)) {
-      setPasswordError('Password must be 8+ chars, include uppercase, lowercase, and number')
-      valid = false
-    }
+    const reqs = checkPasswordReqs(password)
 
     if (isSignup && password !== confirmPassword) {
       setConfirmError('Passwords do not match')
@@ -63,7 +68,7 @@ export default function Login() {
     }
 
     if (!valid) {
-      setStatus({ message: 'Fix the errors above', type: 'error' })
+      setStatus({ message: 'Wrong password', type: 'error' })
       return
     }
 
@@ -119,12 +124,30 @@ export default function Login() {
         <div className="mb-3">
           <input
             type="password"
-            className="form-control"
+            className={`form-control${passwordError ? ' is-invalid' : ''}`}
             placeholder="Password"
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
-          {passwordError && <div className="error" id="passwordError">{passwordError}</div>}
+          {isSignup && (() => {
+            const reqs = checkPasswordReqs(password)
+            const items = [
+              { key: 'length', label: 'At least 8 characters' },
+              { key: 'upper', label: 'One uppercase letter' },
+              { key: 'lower', label: 'One lowercase letter' },
+              { key: 'digit', label: 'One number' },
+            ]
+            return (
+              <ul className="mt-2 mb-0" style={{ listStyle: 'none', padding: 0, fontSize: 13 }}>
+                {items.map(item => (
+                  <li key={item.key} style={{ color: reqs[item.key] ? '#2a9d6f' : '#dc3545' }}>
+                    {reqs[item.key] ? '✓' : '✗'} {item.label}
+                  </li>
+                ))}
+              </ul>
+            )
+          })()}
+          {passwordError && <div className="invalid-feedback d-block">{passwordError}</div>}
         </div>
 
         {isSignup && (

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from '../context/AuthContext'
@@ -115,6 +115,14 @@ function formatBooks() {
   }))
 }
 
+function getCustomProducts() {
+  try {
+    return JSON.parse(localStorage.getItem('customProducts')) || []
+  } catch {
+    return []
+  }
+}
+
 export default function Products() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -185,6 +193,7 @@ export default function Products() {
       setLoading(true)
 
       const bookProducts = formatBooks()
+      const customProducts = getCustomProducts()
 
       if (activeCategory === 'books') {
         setProducts(bookProducts)
@@ -192,10 +201,14 @@ export default function Products() {
         return
       }
 
+      const filteredCustom = activeCategory === 'all'
+        ? customProducts
+        : customProducts.filter(p => p.category === activeCategory)
+
       const localProducts =
         activeCategory === 'all'
-          ? [...fallbackProducts, ...bookProducts]
-          : fallbackProducts.filter(product => product.category === activeCategory)
+          ? [...fallbackProducts, ...bookProducts, ...filteredCustom]
+          : [...fallbackProducts.filter(product => product.category === activeCategory), ...filteredCustom]
 
       setProducts(localProducts)
 
@@ -209,9 +222,9 @@ export default function Products() {
         const apiProducts = data.products || []
 
         if (activeCategory === 'all') {
-          setProducts([...apiProducts, ...bookProducts])
+          setProducts([...apiProducts, ...bookProducts, ...customProducts])
         } else {
-          setProducts(apiProducts)
+          setProducts([...apiProducts, ...filteredCustom])
         }
       } catch {
         setProducts(localProducts)

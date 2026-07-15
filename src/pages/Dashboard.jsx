@@ -1,125 +1,7 @@
-import { useState, useEffect, useRef } from 'react'
-import { Navigate } from 'react-router-dom'
-import axios from 'axios'
+import { useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Breadcrumbs from '../components/Breadcrumbs'
-
-function WishlistSection() {
-  const [wishlist, setWishlist] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem('wishlist')) || []
-    } catch {
-      return []
-    }
-  })
-  const inputRef = useRef(null)
-
-  useEffect(() => {
-    localStorage.setItem('wishlist', JSON.stringify(wishlist))
-  }, [wishlist])
-
-  function removeItem(id) {
-    setWishlist(prev => prev.filter(item => item.id !== id))
-  }
-
-  return (
-    <div>
-      {wishlist.length === 0 ? (
-        <p className="text-muted">Your wishlist is empty. Add items from the Products page.</p>
-      ) : (
-        <div className="d-flex flex-column gap-2">
-          {wishlist.map(item => (
-            <div key={item.id} className="d-flex align-items-center gap-3 border rounded p-2">
-              <img src={item.thumbnail} alt={item.title} style={{ width: 50, height: 50, objectFit: 'cover' }} />
-              <div className="flex-grow-1">
-                <strong>{item.title}</strong><br />
-                <span className="text-muted">${item.price}</span>
-              </div>
-              <button className="btn btn-sm btn-outline-danger" onClick={e => { e.stopPropagation(); removeItem(item.id) }}>Remove</button>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  )
-}
-
-function OrderHistorySection() {
-  const [orders, setOrders] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem('orderHistory')) || []
-    } catch {
-      return []
-    }
-  })
-
-  return (
-    <div>
-      {orders.length === 0 ? (
-        <p className="text-muted">No orders yet.</p>
-      ) : (
-        orders.map((order, i) => (
-          <div key={i} className="border rounded p-3 mb-3">
-            <p className="mb-1 text-muted small">{new Date(order.date).toLocaleString()}</p>
-            {order.items.map((item, j) => (
-              <div key={j} className="d-flex justify-content-between">
-                <span>{item.title} x{item.qty}</span>
-                <span>${(item.price * item.qty).toFixed(2)}</span>
-              </div>
-            ))}
-            <hr className="my-2" />
-            <p className="text-end mb-0 fw-bold">Total: ${order.total.toFixed(2)}</p>
-          </div>
-        ))
-      )}
-    </div>
-  )
-}
-
-function ManageProductsSection() {
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [search, setSearch] = useState('')
-
-  useEffect(() => {
-    axios('https://dummyjson.com/products?limit=100')
-      .then(res => setProducts(res.data.products))
-      .catch(() => {})
-      .finally(() => setLoading(false))
-  }, [])
-
-  function removeProduct(id) {
-    setProducts(prev => prev.filter(p => p.id !== id))
-  }
-
-  const filtered = products.filter(p =>
-    p.title.toLowerCase().includes(search.toLowerCase())
-  )
-
-  return (
-    <div>
-      <input className="form-control mb-3" placeholder="Search products..." value={search} onChange={e => setSearch(e.target.value)} autoFocus />
-      {loading ? (
-        <p>Loading products...</p>
-      ) : filtered.length === 0 ? (
-        <p className="text-muted">No products found.</p>
-      ) : (
-        <div style={{ maxHeight: 400, overflowY: 'auto' }}>
-          {filtered.map(p => (
-            <div key={p.id} className="d-flex align-items-center gap-3 border-bottom py-2">
-              <img src={p.thumbnail} alt={p.title} style={{ width: 50, height: 50, objectFit: 'cover' }} />
-              <div className="flex-grow-1">
-                <strong>{p.title}</strong><br />
-                <span className="text-muted">${p.price}</span>
-              </div>
-              <button className="btn btn-sm btn-outline-danger" onClick={e => { e.stopPropagation(); removeProduct(p.id) }}>Delete</button>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  )
-}
 
 function ManageUsersSection() {
   const [users, setUsers] = useState(() => getUsers())
@@ -251,6 +133,7 @@ function OrdersSection() {
 
 export default function Dashboard() {
   const { isLoggedIn, role } = useAuth()
+  const navigate = useNavigate()
   const [activeSection, setActiveSection] = useState(null)
 
   if (!isLoggedIn) {
@@ -262,7 +145,7 @@ export default function Dashboard() {
   }
 
   const sections = [
-    { key: 'products', title: 'Manage Products', desc: 'Add, edit, or remove products from the catalog.', component: <ManageProductsSection /> },
+    { key: 'items', title: 'Manage Items', desc: 'View, add, and delete products from the catalog.', link: '/manage-items' },
     { key: 'users', title: 'Manage Users', desc: 'View and manage registered users.', component: <ManageUsersSection /> },
     { key: 'orders', title: 'Orders', desc: 'View all customer orders and update their status.', component: <OrdersSection /> },
   ]
@@ -275,15 +158,17 @@ export default function Dashboard() {
       <h2>Admin Panel</h2>
       <div className="d-grid gap-4 mt-4">
         {sections.map(s => (
-          <div key={s.key} className="product bg-white rounded text-start p-4" style={{ cursor: 'pointer' }} onClick={() => setActiveSection(activeSection === s.key ? null : s.key)}>
+          <div key={s.key} className="product bg-white rounded text-start p-4" style={{ cursor: 'pointer' }} onClick={() => s.link ? navigate(s.link) : setActiveSection(activeSection === s.key ? null : s.key)}>
             <div className="d-flex justify-content-between align-items-center">
               <div>
                 <h3 className="mb-1">{s.title}</h3>
                 <p className="mb-0">{s.desc}</p>
               </div>
-              <span className={`text-muted ${activeSection === s.key ? 'rotate-arrow' : ''}`} style={{ fontSize: 20, transition: 'transform 0.2s', transform: activeSection === s.key ? 'rotate(180deg)' : 'none' }}>▼</span>
+              {s.component && (
+                <span style={{ fontSize: 20, transition: 'transform 0.2s', transform: activeSection === s.key ? 'rotate(180deg)' : 'none' }}>▼</span>
+              )}
             </div>
-            {activeSection === s.key && (
+            {activeSection === s.key && s.component && (
               <div className="mt-3 pt-3 border-top">
                 {s.component}
               </div>
