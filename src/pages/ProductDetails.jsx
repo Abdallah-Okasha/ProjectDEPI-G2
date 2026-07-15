@@ -24,6 +24,19 @@ export default function ProductDetails() {
     async function getProduct() {
       if (!id) return
       setLoading(true)
+
+      const customProducts = (() => {
+        try { return JSON.parse(localStorage.getItem('customProducts')) || [] }
+        catch { return [] }
+      })()
+
+      const custom = customProducts.find(p => p.id === id)
+      if (custom) {
+        setProduct(custom)
+        setLoading(false)
+        return
+      }
+
       try {
         const { data } = await axios(`https://dummyjson.com/products/${id}`)
         setProduct(data)
